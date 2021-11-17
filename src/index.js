@@ -98,6 +98,8 @@ class Game extends React.Component {
         let status;
         if (winner) {
             status = "Winner: " + winner;
+        } else if (this.state.stepNumber === 9) { // Calls a draw if no one wins and no moves left.
+            status = "No winner. Game is a draw.";
         } else {
             status = "Next player: " + (this.state.xIsNext ? "X" : "O");
         }
@@ -133,8 +135,6 @@ function calculateWinner(squares) {
         const [a, b, c] = lines[i];
         if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
             return squares[a];
-        } else if(!squares.includes(null)) { // When no one wins, display a message about the result being a draw.
-            return "Draw";
         }
     }
     return null;
